@@ -1,0 +1,345 @@
+/* RESET & GAYA DASAR */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #35d2e7, #5090f1);
+  color: #2f3640;
+  line-height: 1.6;
+}
+
+/* HEADER & NAV */
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+nav a {
+  color: #00a8ff;
+  text-decoration: none;
+  font-weight: bold;
+  border: 1px solid #00a8ff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+nav a:hover {
+  background-color: #00a8ff;
+  color: white;
+}
+
+/* LAYOUT UTAMA (FLEXBOX) */
+main {
+  display: flex;
+  flex-direction: row;
+  max-width: 12700px;
+  margin: 30px auto;
+  padding: 0 20px;
+  gap: 25px;
+}
+
+/* KONTEN KIRI (ARTICLE) */
+.main-content {
+  flex: 2.5;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.main-content h2 {
+  color: #2c3e50;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #f1f2f6;
+  padding-bottom: 8px;
+}
+
+.hobi-desc {
+  font-size: 1.05rem;
+  color: #7f8c8d;
+  margin-bottom: 25px;
+}
+
+.instruction {
+  font-size: 0.9rem;
+  color: #95a5a6;
+  margin-top: 15px;
+}
+
+/* SCROLL HORIZONTAL (Kunci Utama Ujian) */
+.scroll-container {
+ display: flex;
+  flex-direction: row;       /* Memaksa konten berjejer ke kanan, bukan ke bawah */
+  justify-content: center;   /* Membuat kumpulan kartu berada di posisi tengah */
+  align-items: center;       /* Menyelaraskan kartu secara vertikal di tengah */
+  gap: 20px;                 /* Memberi jarak antar kartu gambar */
+  overflow-x: auto;          /* Otomatis memunculkan scroll jika kartu melebihi lebar layar */
+  width: 100%;               /* Menggunakan lebar penuh area artikel */
+  padding: 15px 0;
+}
+
+/* Mempercantik Scrollbar browser */
+.scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #dcdde1;
+  border-radius: 10px;
+}
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #b2bec3;
+}
+
+/* KARTU GAMBAR DI DALAM SCROLL AREA */
+.card {
+  flex: 0 0 240px; /* Ukuran lebar setiap kartu dikunci di 240px */
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #f1f2f6;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.card img {
+  width: 300px;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.card h4 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.view-btn {
+  background-color: #718093;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.view-btn:hover {
+  background-color: #2f3640;
+}
+
+/* SIDEBAR BIODATA (ASIDE) */
+.sidebar {
+  flex: 1;
+}
+
+.profile-card {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  width: 100%; /* Memastikan kartu fleksibel mengikuti lebar sidebar */
+}
+
+
+.profile-card img {
+  width: 100%;          /* Mengizinkan foto melebar maksimal sebatas kartu pembungkus */
+  max-width: 600px;     /* Batas maksimal lebar foto di laptop agar tidak terlalu raksasa */
+  height: 70vh;         /* KUNCI: Tinggi foto otomatis menyesuaikan lebar agar tidak gepeng/terpotong */
+  aspect-ratio: 1 / 1;  /* Memaksa foto tetap berbentuk kotak sempurna */
+  object-fit: cover;    /* Memastikan foto terpusat rapi di dalam bingkai */
+  border-radius: 8px;   /* Memberikan lengkungan halus di pojok foto (bisa diganti 50% jika ingin bulat) */
+  margin-bottom: 15px;
+}
+
+.biodata-table {
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.biodata-table td {
+  padding: 8px 4px;
+  border-bottom: 1px solid #f1f2f6;
+}
+
+/* POP-UP MODAL DENGAN ANIMASI FADE & SCALE */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  max-width: 550px;
+  width: 90%;
+  text-align: center;
+  
+  /* Pengaturan awal transisi animasi (Mengecil & Transparan) */
+  transform: scale(0.7);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efek memantul halus */
+}
+
+/* Class pemicu yang dipasangkan oleh JS */
+.popup-overlay.show {
+  display: flex;
+}
+
+.popup-overlay.show .popup-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.popup-img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  font-size: 30px;
+  color: #95a5a6;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #2c3e50;
+}
+
+.reflection-section {
+  max-width: 1200px;
+  margin: 50px auto 20px auto;
+  padding: 0 20px;
+}
+
+.reflection-section h3 {
+  color: #2c3e50;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 1.6rem;
+}
+.reflection-card {
+  flex: 1; /* Dibagi 3 rata besar */
+  background-color: #fafafa;
+  border-left: none;
+  border-top: 4px solid #00a8ff; /* Aksen garis pindah ke atas kartu */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+}
+
+.reflection-card h4 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+.reflection-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.thanks-card {
+  border-top-color: #2ecc71; 
+  background-color: #f4fbf7;
+}
+
+.footer {
+  text-align: center;
+  color: white;
+  background-color: #2c3e50;
+  padding: 20px;
+}
+
+/* RESPONSIVE LAYOUT UNTUK LAYAR HP (MEDIA QUERY) */
+/* ──────────────────────────────────────────────────────────────
+   PERBAIKAN RESPONSIVITAS TOTAL UNTUK LAYAR HP (MOBILE OPTIMIZED)
+   ────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* 1. Atur susunan utama menumpuk vertikal */
+  main {
+    flex-direction: column;
+    padding: 0 15px;
+    gap: 25px;
+  }
+
+  /* 2. Pastikan lebar konten utama & aside penuh 100% layar HP */
+  .main-content, .sidebar {
+    width: 100%;
+    flex: none; /* Mematikan rasio laptop agar tidak rusak di mobile */
+  }
+
+  /* 3. SOLUSI GALERI GAMBAR KE TENGAH */
+  .scroll-container {
+    display: flex;
+    flex-direction: column;    /* Mengalir vertikal di HP agar sketsa terlihat jelas */
+    align-items: center;       /* KUNCI: Memaksa semua .card berada tepat di TENGAH */
+    justify-content: center;
+    gap: 20px;
+    padding: 15px 0;
+    overflow-x: hidden;        /* Matikan scroll horizontal karena sudah rapi vertikal di HP */
+  }
+
+  /* 4. Sesuaikan ukuran Kartu Gambar di HP */
+  .card {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 280px;          /* Membatasi lebar kartu agar pas di tengah layar HP */
+    margin: 0 auto;            /* Memastikan kartu aman di tengah browser */
+    background: #fff;
+    padding: 12px;
+  }
+
+  .card img {
+    width: 100%;
+    height: 380px;             /* Menjaga rasio tinggi sketsa buatanmu agar tetap tegak rapi */
+    object-fit: cover;
+  }
+
+  /* 5. SOLUSI FOTO PROFIL BIODATA (TENTANG SAYA) DI HP */
+  .profile-card {
+    padding: 25px 15px;
+    width: 100%;
+  }
+
+  /* 6. Atur ulang kontainer refleksi di HP */
+  .reflection-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+.profile-card {
+  padding: 30px 15px; /* Mengurangi padding vertikal agar tidak terlalu panjang kosong */
+}
